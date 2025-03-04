@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules\Password;
 
@@ -15,11 +16,17 @@ class AuthController extends Controller
 
     public function login(Request $request){
 
-        $request->validate([
-            'email' => ['required', 'string','email', 'max:255', 'unique:'. User::class],
-            'password' => ['required', 'comfirmed', 'max:255']
+       $validated =  $request->validate([
+            'email' => ['required', 'string','email', 'max:255'],
+            'password' => ['required','min:3', 'max:255']
         ]);
 
+        if(Auth::attempt($validated)){
+            $request->session()->regenerate();
+
+            return redirect()->intended('/dashboard');
+        }
+        return back()->with('error','Password Atau Email Salah');
     }
 
     public function show(){

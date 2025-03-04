@@ -23,18 +23,23 @@
 
                                     @endif
                                     <!-- batas message -->
-        
-        
+
+                                    @if (session()->has('error'))
+                                    <div class="alert alert-danger" role="alert">
+                                        {{ session('error') }}
+                                    </div>
+                                    @endif
+                                    
                                     <h3>Sign In <i class="fa-solid fa-user"></i></h3>
                                     <p class="mb-4 text-muted">Login Ke akun </p>
                                 </div>
                                 <form action="/login" method="post">
-                                    <!-- @csrf -->
+                                    @csrf
                                     <div class="form-group first">
                                         <label for="Email" class="mb-2"><b>Email</b></label>
                                         <!-- @error('name')is-invalid @enderror -->
-                                        <input type="Email" class="form-control mb-3 " id="Email" placeholder="Email"
-                                            autocomplete="off" required name="Email" >
+                                        <input type="email" class="form-control mb-3 " id="Email" placeholder="Masukan Email"
+                                            autocomplete="off" required name="email" >
                                             <!-- @error('name')
                                                 <small class="invalid-feedback mb-1">{{ $message }}</small>
                                             @enderror -->
