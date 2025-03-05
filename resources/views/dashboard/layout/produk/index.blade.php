@@ -37,13 +37,13 @@
             <tr>
                     <th >{{ $loop->iteration }}</th>
                     <td>{{ $book->name }}</td>
-                    <td>Test </td>
+                    <td>{{ $book->category->name }} </td>
                     <td>{{ $book->author }} </td>
-                    <td>Rp. {{ $book->price }}</td>
+                    <td>Rp. {{number_format($book->price, 0, ',', '.')  }}</td>
                     <td>{{ $book->stock }}</td>
                     <td><img src="{{ Storage::url($book->thumbnail) }}" alt="" height="40" width="40"></td>
                     <td>
-                        <a href="" class="btn btn-info">
+                        <a href="{{ route('admin.book.edit', $book) }}" class="btn btn-info">
                             <i class="fa-solid fa-pen-to-square"></i>
                         </a>
                                

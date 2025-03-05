@@ -52,7 +52,7 @@
           <div class="row py-lg-5">
             <div class="col-lg-6 col-md-8 mx-auto mt-20">
               <h1 class="fw-bold">Bookshop</h1>
-              <p class="lead text-body-secondary fw-light">Buka halaman pertama, dan biarkan dunia baru menyapa. Temukan petualangan, ilmu, dan inspirasi di setiap buku kami.</p>
+              <p class="lead text-body-secondary fw-bold text-light">Buka halaman pertama, dan biarkan dunia baru menyapa. Temukan petualangan, ilmu, dan inspirasi di setiap buku kami.</p>
               <p>
                 <a href="#" class="btn btn-primary my-2">Main call to action</a>
                 <a href="#" class="btn btn-secondary my-2">Secondary action</a>

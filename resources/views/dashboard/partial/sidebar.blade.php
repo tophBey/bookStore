@@ -7,45 +7,44 @@
             <ul class="nav nav-pills flex-column mb-auto">
               <li class="nav-item">
                 <a href="{{ route('home') }}" class="nav-link {{ request()->is('home') ? 'active' : '' }} text-white" aria-current="page">
-                  <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-                  Home
+                <i class="fa-solid fa-house bi pe-none me-2"></i>                  Home
                 </a>
               </li>
               <li>
                 <a href="{{ route('dashboard') }}" class="nav-link {{ request()->is('dashboard') ? 'active' : '' }} text-white link-body-emphasis">
-                  <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                  Dashboard
+                <i class="fa-solid fa-gauge bi pe-none me-2"></i>
+                  <span class=""> Dashboard</span>
                 </a>
               </li>
               <li>
                 <a href="#" class="nav-link {{ request()->is('dashboard') ? 'order' : '' }} text-white link-body-emphasis">
-                  <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                  Orders
+                <i class="fa-solid fa-bag-shopping bi pe-none me-2"></i>
+                  My Orders
                 </a>
               </li>
               <li>
                 <a href="{{ route('admin.category.index') }}" class="nav-link {{ request()->is('dashboard/category') ? 'active' : '' }} text-white link-body-emphasis">
-                  <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                <i class="fa-solid fa-list bi pe-none me-2"></i> 
                   Category
                 </a>
               </li>
               <li>
-                <a href="{{route('admin.book.index')}}" class="nav-link {{ request()->is('book') ? 'active' : '' }} text-white  link-body-emphasis">
-                  <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                  Book
+                <a href="{{route('admin.book.index')}}" class="nav-link {{ request()->is('dashboard/book') ? 'active' : '' }} text-white  link-body-emphasis">
+                <i class="fa-solid fa-book bi pe-none me-2"></i>                  Book
                 </a>
               </li>
               <li>
-                <a href="../banks/banks.html" class="nav-link {{ request()->is('payment') ? 'active' : '' }}  text-white  link-body-emphasis">
-                  <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-                  Payment
+                <a href="{{ route('admin.bank.index') }}" class="nav-link {{ request()->is('dashboard/bank') ? 'active' : '' }}  text-white  link-body-emphasis">
+                <i class="fa-solid fa-money-bill-1-wave pe-none me-2"></i>                  Payment
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link {{ request()->is('customer') ? 'active' : '' }} text-white link-body-emphasis">
-                  <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-                  Customers
-                </a>
+                <form method="post" action="{{ route('logout') }}" class="nav-link {{ request()->is('customer') ? 'active' : '' }} text-white link-body-emphasis">
+                  @csrf
+                  <button type="submit" class="bg-dark text-white border border-0"> <i class="fa-solid fa-right-from-bracket pe-none me-2"></i>
+                  Logout</button>
+                </form>
+                
               </li>
             </ul>
             <hr>

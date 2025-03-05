@@ -1,5 +1,5 @@
 .gradient-background {
-  background: linear-gradient(300deg, #00bfff, #ff4c68, #ef8172);
+  background: linear-gradient(300deg, #00bfff, #99dbf0, #2e61fb);
   background-size: 180% 180%;
   animation: gradient-animation 18s ease infinite;
 }
@@ -35,4 +35,12 @@
 
 .mt-20{
   margin-top: 180px;
+}
+
+section.bg-image-banner{
+  background-image: url('../images/book.jpg');
+  background-repeat: no-repeat ;
+  background-attachment:unset;
+  background-size: 220vh;
+  background-position: top bottom;
 }

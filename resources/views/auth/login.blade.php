@@ -39,7 +39,7 @@
                                         <label for="Email" class="mb-2"><b>Email</b></label>
                                         <!-- @error('name')is-invalid @enderror -->
                                         <input type="email" class="form-control mb-3 " id="Email" placeholder="Masukan Email"
-                                            autocomplete="off" required name="email" >
+                                            autocomplete="on" required name="email" >
                                             <!-- @error('name')
                                                 <small class="invalid-feedback mb-1">{{ $message }}</small>
                                             @enderror -->

@@ -5,6 +5,7 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\PackageBankController;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 
@@ -22,8 +23,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/login',[AuthController::class,'index'])->name('login');
 Route::post('/login',[AuthController::class,'login']);
+Route::post('/logout',[AuthController::class,'logout'])->name('logout');
+
 Route::get('/register',[AuthController::class,'show'])->name('register');
 Route::post('/register',[AuthController::class,'store']);
+
+
+
 
 Route::middleware(['auth'])->group(function(){
 
@@ -40,6 +46,10 @@ Route::middleware(['auth'])->group(function(){
         Route::middleware(['can:manage packages'])->group(function(){
 
             Route::resource('book', BookController::class);
+        });
+        Route::middleware(['can:manage package banks'])->group(function(){
+
+            Route::resource('bank', PackageBankController::class);
         });
     });
 

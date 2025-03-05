@@ -18,7 +18,7 @@
 
     @include('partial.sidebar')
   <!-- Title -->
-  <section id="title" class="gradient-background mt-12 pt-5">
+  <section id="title" class="mt-12 pt-5">
     <main>
         <section class="py-5 text-center min-h-screen container">
           <div class="row py-lg-5">
