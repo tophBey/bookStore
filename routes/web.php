@@ -28,6 +28,13 @@ Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 Route::get('/register',[AuthController::class,'show'])->name('register');
 Route::post('/register',[AuthController::class,'store']);
 
+Route::get('/kategori', [FrontController::class, 'category'])->name('front.category');
+Route::get('/produk', [FrontController::class, 'produk'])->name('front.produk');
+Route::get('/produk/{book}', [FrontController::class, 'produkDetail'])->name('front.produk.detail');
+
+
+
+
 
 
 

@@ -22,6 +22,7 @@
                   My Orders
                 </a>
               </li>
+              @role('super_admin')
               <li>
                 <a href="{{ route('admin.category.index') }}" class="nav-link {{ request()->is('dashboard/category') ? 'active' : '' }} text-white link-body-emphasis">
                 <i class="fa-solid fa-list bi pe-none me-2"></i> 
@@ -38,6 +39,7 @@
                 <i class="fa-solid fa-money-bill-1-wave pe-none me-2"></i>                  Payment
                 </a>
               </li>
+              @endrole
               <li>
                 <form method="post" action="{{ route('logout') }}" class="nav-link {{ request()->is('customer') ? 'active' : '' }} text-white link-body-emphasis">
                   @csrf
