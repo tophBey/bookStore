@@ -51,6 +51,9 @@ Route::middleware(['auth'])->group(function(){
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 
 
+    Route::get('dashboard/my-orders', [DashboardController::class,'myOrders'])->name('dashboard.myOrders');
+    Route::get('dashboard/my-orders/{order}', [DashboardController::class,'myOrdersDetail'])->name('dashboard.myOrders.detail');
+
 
     Route::middleware('can:checkout package')->group(function(){
         // customer wait until dev making view done with param  || auth middleware
@@ -69,6 +72,11 @@ Route::middleware(['auth'])->group(function(){
     });
 
 
+    Route::get('dashboard/orders', [DashboardController::class,'orders'])->name('dashboard.orders');
+
+    // ini harusnya ada parameter yang kirim
+    Route::get('dashboard/orders/{order}', [DashboardController::class,'ordersDetail'])->name('dashboard.orders.detail');
+    Route::patch('dashboard/orders/{order}/save', [DashboardController::class,'update'])->name('dashboard.orders.update');
     // admin
     Route::prefix('dashboard')->name('admin.')->group(function(){
         Route::middleware(['can:manage categories'])->group(function(){
@@ -84,6 +92,12 @@ Route::middleware(['auth'])->group(function(){
             Route::resource('bank', PackageBankController::class);
         });
     });
+
+    
+    
+
+
+
 
    
 

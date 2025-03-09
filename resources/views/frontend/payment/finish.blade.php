@@ -14,7 +14,8 @@
 
     <div class="mt-3 mx-auto d-flex flex-column justify-content-center">
         <h5 class="text-center mb-3">Pembayaran berhasil</h5>
-        <a href="{{ route('dashboard') }}" class="px-3 py-2 bg-success text-decoration-none text-light rounded mx-auto">Cek Pesanan Saya</a>
+        <a href="{{ route('dashboard.myOrders') }}" class="px-3 py-2 bg-success text-decoration-none text-light rounded mx-auto">Cek Pesanan Saya</a>
     </div>
 </div>
 @endsection
+

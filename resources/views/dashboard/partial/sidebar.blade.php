@@ -17,12 +17,18 @@
                 </a>
               </li>
               <li>
-                <a href="#" class="nav-link {{ request()->is('dashboard') ? 'order' : '' }} text-white link-body-emphasis">
+                <a href="{{route('dashboard.myOrders')}}" class="nav-link {{ request()->is('dashboard/my-orders') ? 'active' : '' }} text-white link-body-emphasis">
                 <i class="fa-solid fa-bag-shopping bi pe-none me-2"></i>
                   My Orders
                 </a>
               </li>
               @role('super_admin')
+              <li>
+                <a href="{{route('dashboard.orders')}}" class="nav-link {{ request()->is('dashboard/orders') ? 'active' : '' }} text-white link-body-emphasis">
+                <i class="fa-solid fa-bag-shopping bi pe-none me-2"></i>
+                  Orders
+                </a>
+              </li>
               <li>
                 <a href="{{ route('admin.category.index') }}" class="nav-link {{ request()->is('dashboard/category') ? 'active' : '' }} text-white link-body-emphasis">
                 <i class="fa-solid fa-list bi pe-none me-2"></i> 

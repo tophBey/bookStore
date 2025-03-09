@@ -6,7 +6,6 @@
     <hr>
 
 
-    <a href="{{ route('front.produk') }}" class="text-decoration-none py-2 px-5 text-light bg-info rounded">Kembali</a>
  </div>
 
 <div class="col-lg-6 shadow-lg">
@@ -39,7 +38,7 @@
     <div class="d-flex justify-content-between bg-dark px-2 py-3 rounded mb-3">
         <div class="">
             <p class="text-warning fw-bold">TOTAL</p>
-            <h5 class="text-warning fw-bold">Rp. 1000.000 </h5>
+            <h5 class="text-warning fw-bold">Rp. {{number_format($bookOrder->total_amount, 0, ',', '.')  }}</h5>
         </div>
 
        <div class="flex flex-column justify-content-end align-items-end">
