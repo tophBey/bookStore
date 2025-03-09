@@ -2,9 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PaymentStoreRequest;
+use App\Http\Requests\StoreOrderChekoutRequest;
+use App\Http\Requests\UpdateBookOrderRequest;
 use App\Models\Book;
+use App\Models\BookOrder;
 use App\Models\Category;
+use App\Models\PackageBank;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 
 class FrontController extends Controller
 {
@@ -24,9 +32,13 @@ class FrontController extends Controller
         return view('frontend.category.index', compact('categories'));
     }
 
-    public function produk(){
-        $books = Book::orderByDesc('id')->paginate(10);
+    public function categoryDetail(Category $category){
 
+        return view('frontend.category.categoryDetail', compact('category'));
+    }
+
+    public function produk(Request $request){
+        $books = Book::orderByDesc('id')->filters(request(['name']))->paginate(10)->withQueryString();
         return view('frontend.produk.index', compact('books'));
     }
 
@@ -34,5 +46,108 @@ class FrontController extends Controller
         
         return view('frontend.produk.produkDetail', compact('book'));
 
+    }
+
+
+    public function payment(Book $book){
+        return view('frontend.payment.index', compact('book'));
+    }
+
+    public function paymentStore(PaymentStoreRequest $request,Book $book){
+
+        // dd($book);
+        $user = Auth::user();
+        $bank = PackageBank::orderByDesc('id')->first();
+        $bookOrderId = null;
+
+        DB::transaction(function() use($request, $book, $user, $bank, &$bookOrderId){
+
+            $validated = $request->validated();
+
+            $subTotal = $book->price * $validated['quantity'];
+           
+
+            $validated['user_id'] = $user->id;
+            $validated['is_paid'] = false;
+            $validated['address'] = request('address');
+            $validated['quantity'] = request('quantity');
+            $validated['proof'] = 'dummytrx.png';
+            $validated['book_id'] = $book->id;
+            $validated['package_bank_id'] = $bank->id;
+            $validated['sub_total'] = $subTotal;
+            $validated['total_amount'] = $subTotal;
+
+            $bookOrder = BookOrder::create($validated);
+            $bookOrderId = $bookOrder->id;
+        });
+
+        if($bookOrderId){
+            return redirect()->route('front.chooseBank', $bookOrderId);
+        }else{
+            return back()->withErrors('Failed to create Booking');
+        }
+
+    }
+
+
+    public function chooseBank(Book $book, BookOrder $bookOrder){
+
+        $banks = PackageBank::all();
+        return view('frontend.payment.chooseBank', compact('banks', 'bookOrder'));
+    }
+
+
+    public function chooseBankStore(UpdateBookOrderRequest $request, BookOrder $bookOrder){
+
+        $user = Auth::user();
+        if($bookOrder->user_id != $user->id){
+            abort(403);
+        }
+
+        DB::transaction(function () use($request, $bookOrder, $user) {
+            $validated = $request->validated();
+
+            $bookOrder->update([
+                "package_bank_id" => $validated['package_bank_id']
+            ]);
+        });
+
+        return redirect()->route('front.book_payment', $bookOrder->id);
+
+    }
+
+    public function bookPayment(BookOrder $bookOrder){
+
+        return view('frontend.payment.bookPayment', compact('bookOrder'));
+    }
+
+
+    public function bookPaymentStore(StoreOrderChekoutRequest $request, BookOrder $bookOrder){
+
+
+        $user = Auth::user();
+        if($bookOrder->user_id != $user->id){
+            abort(403);
+        }
+
+        DB::transaction(function() use($request, $bookOrder, $user){
+            $validated = $request->validated();
+
+            if($request->hasFile('proof')){
+                $proofPath = $request->file('proof')->store('proofs', 'public');
+                $validated['proof'] = $proofPath;
+            }
+
+            $bookOrder->update($validated);
+        });
+
+        return redirect()->route('front.finish',);
+
+    }
+
+
+
+    public function finish(){
+        return view('frontend.payment.finish');
     }
 }

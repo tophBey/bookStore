@@ -34,7 +34,7 @@
                 </div>
                 <div class="d-flex">
                     <a href="{{ route('front.produk') }}" class="btn btn-md px-5  btn-outline-info" style="width: 50%;">Kembali</a>
-                    <a href="" class="btn btn-md px-5 btn-primary" style="width: 50%;">Beli</a>
+                    <a href="{{ route('front.payment', $book) }}" class="btn btn-md px-5 btn-primary" style="width: 50%;">Beli</a>
                 </div>
             </div>
         </div>

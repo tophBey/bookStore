@@ -2,14 +2,17 @@
 @section('container')
 <div class="container py-5 mt-5">
 
-
+  <form action="/produk">
     <div class="input-group mb-5">
-        <input type="text" class="form-control" placeholder="Cari Buku" aria-label="Recipient's username" aria-describedby="button-addon2" name="search" value="{{ request('search') }}" autocomplete="off">
+        <input type="text" class="form-control" placeholder="Cari Buku" aria-label="Recipient's username" aria-describedby="button-addon2" name="name" value="{{ request('name') }}" autocomplete="off">
         <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
     </div>
+  </form>
 
 <h2 class="mb-3">Produk Buku <i class="fa-solid fa-newspaper"></i></h2>
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+@if($books->count())
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
     @forelse ($books as $book )
     <div class="col">
       <div class="card shadow-sm">
@@ -36,6 +39,22 @@
     <p class="text-center fw-bold">Belum Ada Buku Terbaru</p>
     @endforelse
   
-  </div>
+</div>
+
+@else
+<p class="text-center fs-2 text-info">Buku <b>{{ request('name') }}</b> Tidak ditemukan</p>
+
+    <div class="row justify-content-center mb-5 mx-auto">
+        <div class="col-md-6">
+            <div class="card text-bg-dark">
+                <img src="https://images.unsplash.com/photo-1527467779599-34448b3fa6a7?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img" alt="404" width="250" height="450">
+                <div class="card-img-overlay py-0 px-0">
+                    <h5 class="card-title text-light gradient-background text-center py-2">404 Not Found</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+@endif
+  
 </div>
 @endsection

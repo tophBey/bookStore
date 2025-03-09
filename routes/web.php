@@ -29,8 +29,15 @@ Route::get('/register',[AuthController::class,'show'])->name('register');
 Route::post('/register',[AuthController::class,'store']);
 
 Route::get('/kategori', [FrontController::class, 'category'])->name('front.category');
+Route::get('/kategori/{category}', [FrontController::class, 'categoryDetail'])->name('front.category.detail');
+
 Route::get('/produk', [FrontController::class, 'produk'])->name('front.produk');
 Route::get('/produk/{book}', [FrontController::class, 'produkDetail'])->name('front.produk.detail');
+
+
+
+
+
 
 
 
@@ -42,6 +49,24 @@ Route::middleware(['auth'])->group(function(){
 
 
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+
+
+
+    Route::middleware('can:checkout package')->group(function(){
+        // customer wait until dev making view done with param  || auth middleware
+        Route::get('/payment/{book}', [FrontController::class, 'payment'])->name('front.payment');
+        Route::post('/payment/save/{book}', [FrontController::class, 'paymentStore'])->name('front.payment.store');
+
+        // ada parameter yaitu buku mana yang akan dibeli || auth middleware
+        Route::get('/payment/choosebank/{bookOrder}', [FrontController::class, 'chooseBank'])->name('front.chooseBank');
+        Route::patch('/payment/choosebank/save/{bookOrder}', [FrontController::class, 'chooseBankStore'])->name('front.chooseBank.store');
+
+        // 
+        Route::get('/payment/book/{bookOrder}', [FrontController::class, 'bookPayment'])->name('front.book_payment');
+        Route::patch('/payment/book/{bookOrder}/save', [FrontController::class, 'bookPaymentStore'])->name('front.book_payment.store');
+
+        Route::get('/book-finish', [FrontController::class, 'finish'])->name('front.finish');
+    });
 
 
     // admin

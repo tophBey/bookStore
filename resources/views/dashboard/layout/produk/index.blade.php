@@ -58,7 +58,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td>Belum ada Produk Buku</td>
+                    <td colspan="8" class="text-center fw-bold">Belum ada Produk Buku</td>
                 </tr>
             @endforelse
                

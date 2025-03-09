@@ -8,7 +8,7 @@
             </div>
 
         <table class="table">
-            <thead class="table-dark">
+            <thead class="table-dark ">
                 <th>No</th>
                 <th>Nama Payment</th>
                 <th>Nama Akun</th>

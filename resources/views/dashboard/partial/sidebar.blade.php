@@ -1,4 +1,4 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-dark" style="width: 280px; min-height: 100vh;">
+<div class="d-flex flex-column flex-shrink-0 p-3 gradient-background" style="width: 280px; min-height: 100vh;">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
               <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
               <span class="fs-4 text-white">My Dashboard</span>
@@ -43,7 +43,7 @@
               <li>
                 <form method="post" action="{{ route('logout') }}" class="nav-link {{ request()->is('customer') ? 'active' : '' }} text-white link-body-emphasis">
                   @csrf
-                  <button type="submit" class="bg-dark text-white border border-0"> <i class="fa-solid fa-right-from-bracket pe-none me-2"></i>
+                  <button type="submit" class="bg-transparent text-white border border-0"> <i class="fa-solid fa-right-from-bracket pe-none me-2"></i>
                   Logout</button>
                 </form>
                 

@@ -14,7 +14,7 @@
   <title>BookShop</title>
 </head>
 
-<body>
+<body class="overflow-x-hidden">
 
     @include('partial.sidebar')
   <!-- Title -->
@@ -75,7 +75,7 @@
                 </div>
               </div>
               @empty
-              <p class="text-center fw-bold">Belum Ada Buku Terbaru</p>
+              <p class="text-center fw-bold ">Belum Ada Buku Terbaru</p>
               @endforelse
             
             </div>
