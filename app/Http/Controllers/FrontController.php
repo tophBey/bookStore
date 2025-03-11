@@ -7,6 +7,7 @@ use App\Http\Requests\StoreOrderChekoutRequest;
 use App\Http\Requests\UpdateBookOrderRequest;
 use App\Models\Book;
 use App\Models\BookOrder;
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\PackageBank;
 use Illuminate\Http\Request;
@@ -20,16 +21,21 @@ class FrontController extends Controller
 
         $books = Book::orderByDesc('id')->paginate(3);
 
+        $cart = Cart::where('user_id', auth()->id())->get();
+
         $categories = Category::orderByDesc('id')->get();
 
-        return view('frontend.index', compact('categories', 'books'));
+        return view('frontend.index', compact('categories', 'books', 'cart'));
     }
 
 
     public function category(){
 
-        $categories = Category::orderByDesc('id')->get();
-        return view('frontend.category.index', compact('categories'));
+         $cart = Cart::where('user_id', auth()->id())->get();
+
+
+        $categories = Category::orderByDesc('id')->paginate(10);
+        return view('frontend.category.index', compact('categories', 'cart'));
     }
 
     public function categoryDetail(Category $category){
@@ -37,9 +43,21 @@ class FrontController extends Controller
         return view('frontend.category.categoryDetail', compact('category'));
     }
 
+    public function about(){
+
+         $cart = Cart::where('user_id', auth()->id())->get();
+
+        return view('frontend.about', compact('cart'));
+
+    }
+
     public function produk(Request $request){
+
+        $cart = Cart::where('user_id', auth()->id())->get();
+
+
         $books = Book::orderByDesc('id')->filters(request(['name']))->paginate(10)->withQueryString();
-        return view('frontend.produk.index', compact('books'));
+        return view('frontend.produk.index', compact('books','cart'));
     }
 
     public function produkDetail(Book $book){
@@ -55,7 +73,6 @@ class FrontController extends Controller
 
     public function paymentStore(PaymentStoreRequest $request,Book $book){
 
-        // dd($book);
         $user = Auth::user();
         $bank = PackageBank::orderByDesc('id')->first();
         $bookOrderId = null;
@@ -63,6 +80,7 @@ class FrontController extends Controller
         DB::transaction(function() use($request, $book, $user, $bank, &$bookOrderId){
 
             $validated = $request->validated();
+
 
             $subTotal = $book->price * $validated['quantity'];
            
@@ -79,6 +97,13 @@ class FrontController extends Controller
 
             $bookOrder = BookOrder::create($validated);
             $bookOrderId = $bookOrder->id;
+
+            // Hapus cart dengan kondisi tertentu (misalnya berdasarkan book_id)
+            $cartItem = $book->cart()->where('book_id', $book->id)->first();
+            if ($cartItem) {
+                $cartItem->delete();
+            }
+
         });
 
         if($bookOrderId){

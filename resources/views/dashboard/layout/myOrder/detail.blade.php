@@ -22,7 +22,7 @@
                         @if ($order->is_paid)
                             <p class="btn btn-success text-light me-4 ms-5">Success</p>
 
-                            <button type="button" class="btn btn-info text-light">Chat Admin</button>
+                            <button type="button" id="whatsApp" class="btn btn-info text-light">Chat Admin</button>
 
                         @else
                             <p class="btn btn-warning text-light me-4 ms-5">waiting</p>
@@ -82,3 +82,7 @@
     </div>
 </div>
 @endsection
+
+@push('chat')
+    <script src="{{ asset('js/book.js') }}"></script>
+@endpush

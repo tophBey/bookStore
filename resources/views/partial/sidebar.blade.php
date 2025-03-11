@@ -7,17 +7,20 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="{{ route('home') }}">About</a>
+                <a class="nav-link {{ request()->is('about') ? 'active' : '' }}" aria-current="page" href="{{ route('about') }}">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('front.produk') }}">Produk</a>
+                <a class="nav-link {{ request()->is('produk') ? 'active' : '' }}"" href="{{ route('front.produk') }}">Produk</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('front.category') }}">Kategori</a>
+                <a class="nav-link {{ request()->is('kategori') ? 'active' : '' }}" href="{{ route('front.category') }}">Kategori</a>
               </li>
               @auth
               <li class="nav-item">
-                <a class="nav-link" href="{{ route('dashboard') }}">Dashboard</a>
+                <a class="nav-link " href="{{ route('dashboard') }}">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ request()->is('cart') ? 'active' : '' }}" href="{{ route('frontend.cart') }}">Cart({{ $cart->where('user_id',auth()->id())->count() }}) <i class="fa-solid fa-cart-shopping"></i></a>
               </li>
               
             </ul>

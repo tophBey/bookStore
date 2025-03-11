@@ -45,10 +45,12 @@
                 <td colspan="6"><p class="text-center fw-bold">Belum Ada Metode Pembayaran <i class="fa-brands fa-creative-commons-zero"></i></p></td>
             </tr>
                 
-            @endforelse
-              
+            @endforelse     
             </tbody>
-        </table>                
+        </table>
+        <div class="d-flex justify-content-center">
+            {{ $banks->links() }}
+        </div>                   
     </div>
 </div>
 @endsection

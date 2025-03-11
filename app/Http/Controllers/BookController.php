@@ -9,6 +9,8 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 
 
 
@@ -88,6 +90,11 @@ class BookController extends Controller
 
 
             if($request->hasFile('thumbnail')){
+
+                if($request->input('oldImage')){
+                    Storage::disk('public')->delete($request->input('oldImage'));
+                }
+                
                 $thumbnailPath = $request->file('thumbnail')->store('thumbnails/' . date('Y/m/d'), 'public');
                 $validated['thumbnail'] = $thumbnailPath;
             }
@@ -108,6 +115,10 @@ class BookController extends Controller
     public function destroy(Book $book)
     {
         DB::transaction(function() use($book){
+
+            if($book->thumbnail){
+                Storage::disk('public')->delete($book->thumbnail);
+            }
             $book->delete();
         });
 

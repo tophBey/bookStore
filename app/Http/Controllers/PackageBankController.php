@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateBankRequest;
 use App\Models\PackageBank;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+
 
 
 class PackageBankController extends Controller
@@ -74,6 +76,11 @@ class PackageBankController extends Controller
 
 
             if($request->hasFile('logo')){
+
+                if($request->input('oldImage')){
+                    Storage::disk('public')->delete($request->input('oldImage'));
+                }
+
                 $logo = $request->file('logo')->store('logo', 'public');
                 $validated['logo'] = $logo;
             }
@@ -90,6 +97,9 @@ class PackageBankController extends Controller
     public function destroy(PackageBank $bank)
     {
         DB::transaction(function() use($bank){
+            if($bank->logo){
+                Storage::disk('public')->delete($bank->logo);
+            }
             $bank->delete();
         });
 

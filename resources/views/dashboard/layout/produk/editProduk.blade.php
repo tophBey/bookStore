@@ -56,6 +56,8 @@
                     <label for="exampleFormControlInput1" class="form-label fw-bold">Foto Buku</label>
                     <img src="{{Storage::url($book->thumbnail)}}" alt="" class="rounded d-block mb-3" width="120" height="100">
                     <input type="file" class="form-control" id="exampleFormControlInput1" name="thumbnail" placeholder="Masukan">
+                    <input type="hidden" name="oldImage" value="{{ $book->thumbnail }}">
+
                     @error('thumbnail')
                         <small class="invalid-feedback mb-1">{{ $message }}</small>
                     @enderror

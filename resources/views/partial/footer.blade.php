@@ -1,4 +1,4 @@
-<section id="footer" class="gradient-background">
+<section id="footer" class="gradient-background mt-30">
     <div class="container">
       <footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5">
         <div class="col mb-3">

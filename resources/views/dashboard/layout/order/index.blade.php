@@ -46,7 +46,10 @@
             
             
             </tbody>
-        </table>  
+        </table> 
+        <div class="d-flex justify-content-center">
+            {{ $orderBook->links() }}
+        </div>
     </div>
 </div>
 @endsection

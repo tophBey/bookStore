@@ -17,6 +17,10 @@ class Book extends Model
         return $this->belongsTo(Category::class,'category_id');
     }
 
+    public function cart(){
+        return $this->hasMany(Cart::class, 'book_id','id');
+    }
+
 
     public function scopeFilters($query, array $filters){
 

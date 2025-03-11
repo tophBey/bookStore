@@ -36,7 +36,7 @@
 
      
        
-        <div class="album py-5 bg-body-tertiary">
+      <div class="album py-5 bg-body-tertiary">
 
         <div class="container ">
           <div class="row">
@@ -66,87 +66,15 @@
 
         
 
-          <div class="container">
-          <h2 class="mb-3">Buku Terbaru <i class="fa-solid fa-newspaper"></i></h2>
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-              @forelse ($books as $book )
-              <div class="col">
-                <div class="card shadow-sm">
-                <!-- bd-placeholder-img card-img-top -->
-                <!-- 225 -->
-                 <img src="{{ Storage::url($book->thumbnail) }}" alt="" height="270">
-                  <div class="card-body">
-                    <div class="d-flex justify-content-between">
-                     <h5>{{ $book->name }}</h5>
-                     <p class="fw-bold text-info">Rp. <span class="">{{number_format($book->price, 0, ',', '.')  }}</span></p>
-                    </div>
-                    <div class="mb-5">
-                      <p>Stock : {{ $book->stock }}</p>
-                      <p>Status : <span class="fw-bold bg-success bg-gradient py-1 px-2 text-light rounded">{{ $book->stock > 0 ? "Tersedia" : "Habis" }}</span></p>
-                    </div>
-                    <div class="d-flex justify-content-between align-items-center">
-                      <a href="" class="btn btn-md px-5 btn-primary" style="width: 49%;">Beli</a>
-                      <a href="{{ route('front.produk.detail', $book) }}" class="btn btn-md px-5 btn-info text-light" style="width: 49%;">Info</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              @empty
-              <p class="text-center fw-bold ">Belum Ada Buku Terbaru</p>
-              @endforelse
-            
-            </div>
-          </div>
-        </div>
+         @include('partial.content');
 
-    <div class="row bg-light g-4 py-5 row-cols-1 row-cols-lg-3 border">
+      </div>
 
-      <div class="col d-flex align-items-start">
-        <div class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-          <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"></use></svg>
-        </div>
-        <div>
-          <h3 class="fs-2 text-body-emphasis">Terpercaya</h3>
-          <p>Semua buku kami adalah produk asli dan berkualitas. informasi yang akurat, serta pengalaman berbelanja yang nyaman dan aman</p>
-          <a href="{{ route('front.produk') }}" class="btn btn-primary">
-            Coba Sekarang
-          </a>
-        </div>
-      </div>
-      <div class="col d-flex align-items-start">
-        <div class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-          <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"></use></svg>
-        </div>
-        <div>
-          <h3 class="fs-2 text-body-emphasis">Lengkap</h3>
-          <p>Koleksi kami mencakup buku dari berbagai kategori dan untuk segala usia, sehingga Anda dapat menemukan banyak bakat luar biasa dari dalam negeri</p>
-          <a href="{{ route('front.produk') }}" class="btn btn-primary">
-            Coba Sekarang
-          </a>
-        </div>
-      </div>
-      <div class="col d-flex align-items-start">
-        <div class="icon-square text-body-emphasis d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
-          <svg class="bi" width="1em" height="1em"><use xlink:href="#tools"></use></svg>
-        </div>
-        <div>
-          <h3 class="fs-2 text-body-emphasis">Pelayanan Ramah</h3>
-          <p>Tim kami selalu siap membantu Anda dengan rekomendasi terbaik, Temukan buku favorit Anda di Bookshop</p>
-          <a href="{{ route('front.produk') }}" class="btn btn-primary">
-            Coba Sekarang
-          </a>
-        </div>
-      </div>
-    </div>
+      @include('partial.feature')
       
     </main>
   </section>
 
-  
-  
-  
- 
-  
   @include('partial.footer')
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

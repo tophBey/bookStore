@@ -4,16 +4,7 @@
 <div class="row">
     <div class="col-lg-12">
         <h1 class="text-center mb-5">List Produk Buku</h1>
-        <!-- @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li class="text-dark">{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-        @endif -->
-
+       
         <div class="d-flex w-full justify-content-end mb-4 px-4">
             <a href="{{ route('admin.book.create') }}" class="text-decoration-none py-2 px-3 bg-success rounded text-white">Tambah Produk</a>
         </div>
@@ -63,7 +54,11 @@
             @endforelse
                
             </tbody>
-        </table>                
+        </table>
+        
+        <div class="d-flex justify-content-center">
+            {{ $books->links() }}
+        </div>
     </div>
 </div>
     

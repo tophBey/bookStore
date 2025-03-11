@@ -45,6 +45,11 @@
                 <i class="fa-solid fa-money-bill-1-wave pe-none me-2"></i>                  Payment
                 </a>
               </li>
+              <li>
+                <a href="{{ route('dashboard.users.index') }}" class="nav-link {{ request()->is('dashboard/users') ? 'active' : '' }}  text-white  link-body-emphasis">
+                <i class="fa-solid fa-users pe-none me-2"></i>  Pengguna
+                </a>
+              </li>
               @endrole
               <li>
                 <form method="post" action="{{ route('logout') }}" class="nav-link {{ request()->is('customer') ? 'active' : '' }} text-white link-body-emphasis">

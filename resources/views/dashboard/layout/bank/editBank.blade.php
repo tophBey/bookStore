@@ -24,6 +24,8 @@
                 <label for="exampleFormControlInput1" class="form-label fw-bold">Foto Logo Pembayaran</label>
                 <img src="{{ Storage::url($bank->logo) }}" alt="" class="rounded-2xl object-cover w-[90px] d-block mb-3 h-[90px]" width="120" height="120" >
                 <input type="file" class="form-control" id="exampleFormControlInput1" name="logo" placeholder="">
+                <input type="hidden" name="oldImage" value="{{ $bank->logo }}">
+
             </div>       
                 <button type="submit" class="btn btn-success px-5">Update</button>
         </form>

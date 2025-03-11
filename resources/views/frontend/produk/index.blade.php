@@ -29,16 +29,39 @@
             <p>Status : <span class="fw-bold bg-success bg-gradient py-1 px-2 text-light rounded">{{ $book->stock > 0 ? "Tersedia" : "Habis" }}</span></p>
           </div>
           <div class="d-flex justify-content-between align-items-center">
-              <a href="" class="btn btn-md px-5 btn-primary" style="width: 49%;">Beli</a>
+              <a href="{{ route('front.payment',$book) }}" class="btn btn-md px-5 btn-primary" style="width: 49%;">Beli</a>
               <a href="{{ route('front.produk.detail', $book) }}" class="btn btn-md px-5 btn-info text-light" style="width: 49%;">Info</a>
+              @if (auth()->check())
+                    @if ($cart->where('book_id', $book->id)->count())
+                        <a href="{{ route('frontend.cart') }}" style="width: 49%;"  class="btn  btn-outline-info text-dark"><i class="fa-solid fa-check"></i></a>
+                      @else
+                      <form method="post" action="{{ route('frontend.cart.store', $book) }}" style="width: 49%;">
+                          @csrf
+                            <input type="hidden" name="book_id" value="{{ $book->id }}">
+                            <button type="submit" style="width: 100%;" class="btn btn-md px-5 btn-outline-info text-dark"><i class="fa-solid fa-cart-shopping"></i></button>
+                      </form>
+                      @endif
+                    @else
+                    <form method="post" action="{{ route('frontend.cart.store', $book) }}" style="width: 49%;">
+                          @csrf
+                            <input type="hidden" name="book_id" value="{{ $book->id }}">
+                            <button type="submit" style="width: 100%;" class="btn btn-md px-5 btn-outline-info text-dark"><i class="fa-solid fa-cart-shopping"></i></button>
+                    </form>
+                  @endif
           </div>
         </div>
       </div>
+
+      
     </div>
     @empty
     <p class="text-center fw-bold">Belum Ada Buku Terbaru</p>
     @endforelse
   
+</div>
+
+<div class="d-flex justify-content-center">
+    {{ $books->links() }}
 </div>
 
 @else

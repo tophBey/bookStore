@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 
@@ -79,6 +80,11 @@ class CategoryController extends Controller
 
 
             if($request->hasFile('icon')){
+
+                if($request->input('oldImage')){
+                    Storage::disk('public')->delete($request->input('oldImage'));
+                }
+
                 $iconPath = $request->file('icon')->store('icons', 'public');
                 $validated['icon'] = $iconPath;
             }
@@ -97,6 +103,9 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         DB::transaction(function() use($category){
+            if($category->icon){
+                Storage::disk('public')->delete($category->icon);
+            }
             $category->delete();
         });
 

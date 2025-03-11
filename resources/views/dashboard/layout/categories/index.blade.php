@@ -45,7 +45,10 @@
             @endforelse
                 
             </tbody>
-        </table>             
+        </table>
+        <div class="d-flex justify-content-center">
+            {{ $categories->links() }}
+        </div>                 
     </div>
 </div>
 @endsection

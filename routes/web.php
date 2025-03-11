@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\PackageBankController;
+use App\Http\Controllers\UserController;
 use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Route;
 
@@ -20,10 +22,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/about', [FrontController::class,'about'])->name('about');
+
 Route::get('/', [FrontController::class, 'index'])->name('home');
 Route::get('/login',[AuthController::class,'index'])->name('login');
 Route::post('/login',[AuthController::class,'login']);
 Route::post('/logout',[AuthController::class,'logout'])->name('logout');
+
+
 
 Route::get('/register',[AuthController::class,'show'])->name('register');
 Route::post('/register',[AuthController::class,'store']);
@@ -49,14 +55,19 @@ Route::middleware(['auth'])->group(function(){
 
 
     Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
-
-
     Route::get('dashboard/my-orders', [DashboardController::class,'myOrders'])->name('dashboard.myOrders');
     Route::get('dashboard/my-orders/{order}', [DashboardController::class,'myOrdersDetail'])->name('dashboard.myOrders.detail');
 
 
+
+    Route::get('/cart', [CartController::class, 'show'])->name('frontend.cart');
+    Route::post('/cart/{book}',[CartController::class, 'addToCart'])->name('frontend.cart.store');
+    Route::delete('/cart/{id}', [CartController::class, 'deleteFromCart'])->name('frontend.cart.destroy');
+
+
+
     Route::middleware('can:checkout package')->group(function(){
-        // customer wait until dev making view done with param  || auth middleware
+        // customer menunggu sampai developer menerima parameter  || auth middleware
         Route::get('/payment/{book}', [FrontController::class, 'payment'])->name('front.payment');
         Route::post('/payment/save/{book}', [FrontController::class, 'paymentStore'])->name('front.payment.store');
 
@@ -71,12 +82,13 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/book-finish', [FrontController::class, 'finish'])->name('front.finish');
     });
 
+    // user
+    Route::get('dashboard/users',[UserController::class,'index'])->name('dashboard.users.index');
 
     Route::get('dashboard/orders', [DashboardController::class,'orders'])->name('dashboard.orders');
-
-    // ini harusnya ada parameter yang kirim
     Route::get('dashboard/orders/{order}', [DashboardController::class,'ordersDetail'])->name('dashboard.orders.detail');
     Route::patch('dashboard/orders/{order}/save', [DashboardController::class,'update'])->name('dashboard.orders.update');
+
     // admin
     Route::prefix('dashboard')->name('admin.')->group(function(){
         Route::middleware(['can:manage categories'])->group(function(){
@@ -92,23 +104,6 @@ Route::middleware(['auth'])->group(function(){
             Route::resource('bank', PackageBankController::class);
         });
     });
-
-    
-    
-
-
-
-
-   
-
-    // Route::prefix('dashboard')->name('dashboard.')->group(function(){
-    //     Route::middleware('can:view order')->group(function(){
-
-            
-
-    //     });
-    // });
-
 });
 
 
