@@ -63,8 +63,7 @@
             <hr>
             <div class="dropdown">
               <a href="#" class="d-flex text-white align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong class="text-white">mdo</strong>
+                <strong class="text-white">{{ auth()->user()->name }}</strong>
               </a>
               <ul class="dropdown-menu text-small shadow">
                 <li><a class="dropdown-item" href="#">New project...</a></li>
