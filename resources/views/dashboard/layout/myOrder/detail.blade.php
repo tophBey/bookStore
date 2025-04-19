@@ -26,7 +26,7 @@
 
                         @else
                             <p class="btn btn-warning text-light me-4 ms-5">waiting</p>
-                            <button type="button" class="btn btn-info text-light">Chat Admin</button>
+                            <button type="button" id="whatsApp" class="btn btn-info text-light">Chat Admin</button>
 
                         @endif
                     </div>

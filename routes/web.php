@@ -25,8 +25,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/about', [FrontController::class,'about'])->name('about');
 
 Route::get('/', [FrontController::class, 'index'])->name('home');
+
 Route::get('/login',[AuthController::class,'index'])->name('login');
 Route::post('/login',[AuthController::class,'login']);
+
 Route::post('/logout',[AuthController::class,'logout'])->name('logout');
 
 
@@ -81,6 +83,8 @@ Route::middleware(['auth'])->group(function(){
 
         Route::get('/book-finish', [FrontController::class, 'finish'])->name('front.finish');
     });
+
+
 
     // user
     Route::get('dashboard/users',[UserController::class,'index'])->name('dashboard.users.index');

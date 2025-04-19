@@ -15,6 +15,8 @@
     <div class="d-flex overflow-x-hidden">
        @include('dashboard.partial.sidebar')
 
+       
+
        <div class="d-flex flex-column overflow-x-hidden" style="width: 100%;">
             @include('dashboard.partial.header')
 
@@ -26,9 +28,9 @@
     </div>
 
     
+    @stack('chat')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    @stack('chat')
 
 </body>
 </html>

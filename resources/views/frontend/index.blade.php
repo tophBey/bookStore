@@ -57,7 +57,7 @@
 
               <div class="col-lg-12 px-5 mx-2">
               @forelse ($categories as $category)
-                <a href="" class="btn btn-outline-info "><img src="{{ Storage::url($category->icon) }}" alt="" class="rounded" width="40" height="40">  {{ $category->name }}</a>
+                <a href="{{ route('front.category.detail', $category) }}" class="btn btn-outline-info "><img src="{{ Storage::url($category->icon) }}" alt="" class="rounded" width="40" height="40">  {{ $category->name }}</a>
               @empty
                 <p class="text-center fw-bold">Belum Ada Kategori Terbaru</p>
               @endforelse

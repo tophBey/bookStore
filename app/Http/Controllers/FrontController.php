@@ -40,7 +40,10 @@ class FrontController extends Controller
 
     public function categoryDetail(Category $category){
 
-        return view('frontend.category.categoryDetail', compact('category'));
+        $cart = Cart::where('user_id', auth()->id())->get();
+
+
+        return view('frontend.category.categoryDetail', compact('category', 'cart'));
     }
 
     public function about(){
